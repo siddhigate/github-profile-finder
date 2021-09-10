@@ -73,7 +73,8 @@ function getRepos(username){
         headerDiv.style.marginTop = "2rem";
         if(json.length >= 2){
             json = shuffleArray(json)
-            reposCardDiv.innerHTML = renderRepos(json)
+            reposCardDiv.innerHTML = renderRepos(json);
+            window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
         }
         
     })
@@ -92,6 +93,7 @@ function shuffleArray(array) {
 
 searchBtn.addEventListener("click", () => {
 
+    errorDiv.innerHTML = "";
     reposCardDiv.innerHTML = "";
     profileCardDiv.innerHTML = "";
     loadingDiv.style.display = "block";
