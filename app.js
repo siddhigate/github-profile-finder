@@ -3,6 +3,9 @@ const inputSearch = document.querySelector("#search-txt");
 const outputDiv = document.querySelector(".search-result-card");
 const headerDiv = document.querySelector(".container-header");
 const loadingDiv = document.querySelector(".loading")
+const profileCardDiv = document.querySelector(".profile-card");
+const reposCardDiv = document.querySelector(".repos-card");
+const errorDiv = document.querySelector(".error")
 
 const APIURL = 'https://api.github.com/users/';
 
@@ -28,7 +31,7 @@ function findUser(username){
     })
     .then(json => {
         loadingDiv.style.display = "none";
-       outputDiv.innerHTML += renderProfileCard(json.avatar_url, json.login, json.followers, json.following)
+       profileCardDiv.innerHTML = renderProfileCard(json.avatar_url, json.login, json.followers, json.following, json.html_url)
     })
     .catch(errorHandler)
     ;
@@ -39,13 +42,13 @@ function errorHandler(error){
     if(error.status == 404){
         loadingDiv.style.display = "none";
         headerDiv.style.marginTop ="2rem";
-        outputDiv.innerHTML = `<div class="error-div"> <img src="./assets/Octocat.png" class="error-img"> <div class="error-msg">Oops! User Not found :( </div></div>`; 
+        errorDiv.innerHTML = `<div class="error-div"> <img src="./assets/Octocat.png" class="error-img"> <div class="error-msg">Oops! User Not found :( </div></div>`; 
     }
 
     if(error.status == 403){
         loadingDiv.style.display = "none";
         headerDiv.style.marginTop ="2rem";
-        outputDiv.innerHTML = `<div class="error-div"> <img src="./assets/Octocat.png" class="error-img"> <div class="error-msg">Oops! Rate Limit Exceeded! Try again later :( </div></div>`; 
+        errorDiv.innerHTML = `<div class="error-div"> <img src="./assets/Octocat.png" class="error-img"> <div class="error-msg">Oops! Rate Limit Exceeded! Try again later :( </div></div>`; 
     }
 
     console.log(error.status, error.statusText)
@@ -70,7 +73,7 @@ function getRepos(username){
         headerDiv.style.marginTop = "2rem";
         if(json.length >= 2){
             json = shuffleArray(json)
-            outputDiv.innerHTML += renderRepos(json)
+            reposCardDiv.innerHTML = renderRepos(json)
         }
         
     })
@@ -89,41 +92,44 @@ function shuffleArray(array) {
 
 searchBtn.addEventListener("click", () => {
 
-    outputDiv.innerHTML = "";
+    reposCardDiv.innerHTML = "";
+    profileCardDiv.innerHTML = "";
     loadingDiv.style.display = "block";
     setTimeout(()=>{
         findUser(inputSearch.value);
         getRepos(inputSearch.value);
     }, 1500)
     
-    
-    // headerDiv.style.marginTop = "2rem";
-    // outputDiv.innerHTML = renderProfileCard() + renderRepos;
 })
 
 
 
-function renderProfileCard(profileImage, profileUsername, followerCount, followingCount){
+function renderProfileCard(profileImage, profileUsername, followerCount, followingCount, htmlUrl){
 
-    return ` <div class="profile-card">
-                <img class="profile-image" src="${profileImage}" alt="">
-                <div class="profile-username">${profileUsername}</div>
+    return ` 
+                <a href="${htmlUrl}" target="_blank" style="text-decoration:none;">
+                    <img class="profile-image" src="${profileImage}" alt="">
+                </a>
+                
+                <a href="${htmlUrl}" target="_blank" style="text-decoration:none;">
+                    <div class="profile-username">${profileUsername}</div>
+                </a>
                 <div class="profile-stats">
                     <img class="icon-stats" src="./assets/users.png" alt="">
                     <div class="follow-count"> ${followerCount} <span style="color: #6B7280"> followers </span> ${followingCount} <span style="color: #6B7280">following </span></div>  
                 </div>
-            </div>
+            
             `;
 }
 
 function renderRepos(repoObj){
 
-    return `<div class="repos-card">
+    return `
                 <h3>Some Repos</h3>
                 <div class="repo-card">
                     <div class="repo-title">
                     <img src="./assets/repo.png" alt="" class="repo-icon">
-                    <div class="repo-name">${repoObj[0].name}</div>
+                    <a style="text-decoration-none;" href= "${repoObj[0].html_url}"  target="_blank"> <div class="repo-name">${repoObj[0].name}</div></a>
                     </div>
                     <div class="repo-date">
                         Created at ${repoObj[0].created_at}
@@ -139,7 +145,7 @@ function renderRepos(repoObj){
                 <div class="repo-card">
                     <div class="repo-title">
                         <img src="./assets/repo.png" alt="" class="repo-icon">
-                        <div class="repo-name">${repoObj[1].name}</div>
+                        <a style="text-decoration-none;" href= "${repoObj[1].html_url}" target="_blank"> <div class="repo-name">${repoObj[1].name}</div></a>
                     </div>
                     <div class="repo-date">
                         Created at ${repoObj[1].created_at}
@@ -150,6 +156,6 @@ function renderRepos(repoObj){
                         <img class="icon-stats" src="./assets/fork.png" alt="">
                         <div  class="fork-count">${repoObj[1].forks}</div>
                     </div>
-            </div>
+            
             `;
 }
