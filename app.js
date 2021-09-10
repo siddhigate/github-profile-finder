@@ -91,8 +91,12 @@ searchBtn.addEventListener("click", () => {
 
     outputDiv.innerHTML = "";
     loadingDiv.style.display = "block";
-    findUser(inputSearch.value);
-    getRepos(inputSearch.value)
+    setTimeout(()=>{
+        findUser(inputSearch.value);
+        getRepos(inputSearch.value);
+    }, 1500)
+    
+    
     // headerDiv.style.marginTop = "2rem";
     // outputDiv.innerHTML = renderProfileCard() + renderRepos;
 })

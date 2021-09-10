@@ -249,7 +249,12 @@ button{
     } 
 
     .error-img{
-        width:25%;
+        width:30%;
+    }
+
+    
+    .error-div{
+        margin-top: 2rem;
     }
 }
 
@@ -264,6 +269,7 @@ button{
     .repos-card{
         margin-left:3rem;
     }
+
 }
 
 
