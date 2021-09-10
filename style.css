@@ -58,11 +58,9 @@ li{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-
-header{
     margin-top:20vh;
 }
+
 
 .header-image{
     width:6rem;
@@ -112,7 +110,101 @@ button{
     background: var(--primary-color);
 }
 
+/*=== search result card===  */
+.search-result-card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:90%;
+    margin: auto;
+    margin-top:3rem;
 
+}
+
+.profile-card{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-image{
+    width: 14rem;
+    border-radius: 7rem;
+}
+
+.profile-username{
+    color: var(--input-color);
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+.profile-stats{
+    display: flex;
+    margin-top:0.5rem
+}
+.icon-stats{
+    width: 1.3rem;
+    height: 1.3rem;
+    margin: 0 0.25rem 0 0.5rem;
+    color: darkgray
+}
+
+.repos-card{
+    
+    width:80%;
+    /* margin-left:2rem; */
+    padding: 0 1rem;
+    height: 100%;    
+    margin-top:2rem;
+    
+}
+
+.repo-card{
+    border:1px solid darkgray;
+    /* width: 45%; */
+    height: 6rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    margin-top:1rem;
+}
+
+.repo-title{
+    display: flex;
+    margin-top: 0.25rem;
+}
+
+
+.repo-icon{
+    margin: 0 1rem 0 0.5rem;
+}
+
+.repo-name{
+    color: #0969da;
+    font-weight: 300;
+}
+
+.repo-date{
+    margin: 0.75rem 0 0 0.5rem;
+    font-size: 0.9rem;
+    color: darkgray
+}
+
+.repo-stats{
+    display: flex;
+    margin-top:0.75rem;
+}
+
+.follow-count{
+    /* color:#6B7280; */
+    font-size:0.95rem;
+    margin-left: 0.2rem;
+}
+
+.star-count, .fork-count{
+    margin-right:1rem;
+    font-size: 0.95rem;
+}
 
 @media (min-width: 760px) {
 
@@ -123,4 +215,34 @@ button{
     .container-main{
         width:40%;
     } 
+
+    
 }
+
+@media (min-width: 1000px){
+
+    .search-result-card{
+        flex-direction: row;
+        width: 60%;
+    }
+
+    
+    .repos-card{
+        margin-left:3rem;
+    }
+}
+
+
+@media (min-width: 1300px){
+
+    .search-result-card{
+        flex-direction: row;
+        width: 50%;
+    }
+
+    .repos-card{
+        margin-left:3rem;
+    }
+
+}
+
