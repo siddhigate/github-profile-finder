@@ -165,7 +165,7 @@ button{
 .repo-card{
     border:1px solid darkgray;
     /* width: 45%; */
-    height: 6rem;
+    
     padding: 0.5rem;
     border-radius: 0.5rem;
     margin-top:1rem;
@@ -179,6 +179,8 @@ button{
 
 .repo-icon{
     margin: 0 1rem 0 0.5rem;
+    width:1.5rem;
+    height:1.5rem;
 }
 
 .repo-name{
