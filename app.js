@@ -41,6 +41,13 @@ function errorHandler(error){
         headerDiv.style.marginTop ="2rem";
         outputDiv.innerHTML = `<div class="error-div"> <img src="./assets/Octocat.png" class="error-img"> <h2 class="error-msg">Oops! User Not found </h2></div>`; 
     }
+
+    if(error.status == 403){
+        loadingDiv.style.display = "none";
+        headerDiv.style.marginTop ="2rem";
+        outputDiv.innerHTML = `<div class="error-div"> <img src="./assets/Octocat.png" class="error-img"> <h2 class="error-msg">Oops! Rate Limit Exceeded! Try again later </h2></div>`; 
+    }
+
     console.log(error.status, error.statusText)
 }
 
