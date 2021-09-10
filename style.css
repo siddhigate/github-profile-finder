@@ -90,7 +90,7 @@ input{
     color: var(--primary-color);
     letter-spacing: 0.5px;
     cursor: pointer;
-    width: 75%;
+    width: 60%;
     text-align: left;
 }
 
@@ -118,6 +118,7 @@ button{
     width:90%;
     margin: auto;
     margin-top:3rem;
+    margin-bottom: 3rem;
 
 }
 
@@ -204,6 +205,29 @@ button{
 .star-count, .fork-count{
     margin-right:1rem;
     font-size: 0.95rem;
+}
+
+/* ===== loading ====== */
+.loading{
+    display: block;
+    margin:auto;
+    display: none;
+    margin-top:3rem;
+}
+
+/* ==== error ==== */
+.error-msg{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.error-img{
+    width: 30%;
+    display: block;
+    margin: auto;
+    margin-top: 2rem;
 }
 
 @media (min-width: 760px) {

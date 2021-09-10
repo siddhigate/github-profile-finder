@@ -2,6 +2,7 @@ const searchBtn = document.querySelector("#search-btn");
 const inputSearch = document.querySelector("#search-txt");
 const outputDiv = document.querySelector(".search-result-card");
 const headerDiv = document.querySelector(".container-header");
+const loadingDiv = document.querySelector(".loading")
 
 const APIURL = 'https://api.github.com/users/';
 
@@ -15,26 +16,56 @@ function getRepoURL(username){
 
 function findUser(username){  
     fetch(getURL(username))
-    .then(response=>response.json())
+    .then(response=> {
+        if(!response.ok){
+            const responseError = {
+                statusText: response.statusText,
+                status: response.status
+           };
+            throw responseError;
+        }
+        return response.json()
+    })
     .then(json => {
+        loadingDiv.style.display = "none";
        outputDiv.innerHTML += renderProfileCard(json.avatar_url, json.login, json.followers, json.following)
     })
     .catch(errorHandler)
     ;
 }
 
-function errorHandler(){
-
+function errorHandler(error){
+    
+    if(error.status == 404){
+        loadingDiv.style.display = "none";
+        headerDiv.style.marginTop ="2rem";
+        outputDiv.innerHTML = `<div class="error-div"> <img src="./assets/Octocat.png" class="error-img"> <h2 class="error-msg">Oops! User Not found </h2></div>`; 
+    }
+    console.log(error.status, error.statusText)
 }
 
 function getRepos(username){
 
     fetch(getRepoURL(username))
-    .then(response=>response.json())
+    .then(response=> {
+        if(!response.ok){
+            const responseError = {
+                statusText: response.statusText,
+                status: response.status
+           };
+            throw responseError;
+        }
+        return response.json()
+    })
     .then(json => {
-        json = shuffleArray(json)  
-        outputDiv.innerHTML += renderRepos(json)
-        headerDiv.style.marginTop = "3rem";
+        
+        loadingDiv.style.display = "none";
+        headerDiv.style.marginTop = "2rem";
+        if(json.length >= 2){
+            json = shuffleArray(json)
+            outputDiv.innerHTML += renderRepos(json)
+        }
+        
     })
     .catch(errorHandler)
     ;
@@ -51,7 +82,8 @@ function shuffleArray(array) {
 
 searchBtn.addEventListener("click", () => {
 
-    outputDiv.innerHTML ="";
+    outputDiv.innerHTML = "";
+    loadingDiv.style.display = "block";
     findUser(inputSearch.value);
     getRepos(inputSearch.value)
     // headerDiv.style.marginTop = "2rem";
