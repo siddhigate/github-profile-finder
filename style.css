@@ -216,18 +216,26 @@ button{
 }
 
 /* ==== error ==== */
-.error-msg{
+.error-div{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom:2rem;
 }
 
 .error-img{
-    width: 30%;
+    width: 50%;
     display: block;
     margin: auto;
-    margin-top: 2rem;
+    
+}
+
+.error-msg{
+    margin:1.2rem;
+    font-size: 1.3rem;
+    font-weight: 300;
+    text-align:center;
 }
 
 @media (min-width: 760px) {
@@ -240,7 +248,9 @@ button{
         width:40%;
     } 
 
-    
+    .error-img{
+        width:25%;
+    }
 }
 
 @media (min-width: 1000px){
