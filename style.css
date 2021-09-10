@@ -53,10 +53,11 @@ li{
 }
 
 /* ===== header ===== */
-.container-flex{
+.container-header{
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 header{
@@ -75,14 +76,24 @@ main{
     
 }
 
+.container-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:90%;
+    margin: auto;
+}
+
 input{
     border: 1px solid var(--primary-color);
     border-radius: 0.5rem;
-    padding:1rem 6rem;
+    padding:1rem;
     font-size: 1rem;
     color: var(--primary-color);
     letter-spacing: 0.5px;
     cursor: pointer;
+    width: 75%;
+    text-align: left;
 }
 
 button{
@@ -99,4 +110,17 @@ button{
     margin-left:1rem;
     border-radius: 0.5rem;
     background: var(--primary-color);
+}
+
+
+
+@media (min-width: 760px) {
+
+    .container-header{
+        flex-direction: row;
+    }
+
+    .container-main{
+        width:40%;
+    } 
 }
