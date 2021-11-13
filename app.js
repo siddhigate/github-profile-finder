@@ -95,8 +95,8 @@ function shuffleArray(array) {
     return array;
 }
 
-searchBtn.addEventListener("click", () => {
-
+function clickHandler() {
+    
     errorDiv.innerHTML = "";
     reposCardDiv.innerHTML = "";
     profileCardDiv.innerHTML = "";
@@ -106,8 +106,16 @@ searchBtn.addEventListener("click", () => {
         getRepos(inputSearch.value);
     }, 1500)
     
-})
+}
 
+searchBtn.addEventListener("click", clickHandler)
+
+inputSearch.addEventListener("keypress", (e) => {
+
+    if(e.key === 'Enter'){
+        clickHandler();
+    }
+});
 
 
 function renderProfileCard(profileImage, profileUsername, followerCount, followingCount, htmlUrl){
