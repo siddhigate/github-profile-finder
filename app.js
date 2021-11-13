@@ -76,6 +76,10 @@ function getRepos(username){
             reposCardDiv.innerHTML = renderRepos(json);
             window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
         }
+        else {
+            reposCardDiv.innerHTML = `
+            <div class="error-div no-repo-error-div"> <img src="./assets/Octocat.png" class="no-repo-error-img"> <div class="error-msg"> No Repos  :( </div></div>`
+        }
         
     })
     .catch(errorHandler)

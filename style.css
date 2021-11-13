@@ -159,7 +159,6 @@ button{
     padding: 0 1rem;
     height: 100%;    
     margin-top:2rem;
-    
 }
 
 .repo-card{
@@ -242,6 +241,20 @@ button{
     text-align:center;
 }
 
+.no-repo-error-img {
+    width: 50%;
+    display: block;
+    margin: auto;
+    margin-top:2rem;
+    
+}
+
+.no-repo-error-div {
+    border:1px solid darkgray;
+    border-radius: 0.5rem;
+    
+}
+
 @media (min-width: 760px) {
 
     .container-header{
@@ -267,6 +280,10 @@ button{
     
     .error-div{
         margin-top: 2rem;
+    }
+
+    .no-repo-error-img {
+        width: 40%;
     }
 }
 
