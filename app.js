@@ -9,6 +9,8 @@ const errorDiv = document.querySelector(".error")
 
 const APIURL = 'https://api.github.com/users/';
 
+let userFound = false;
+
 function getURL(username){
     return APIURL + username;
 }
@@ -30,6 +32,8 @@ function findUser(username){
         return response.json()
     })
     .then(json => {
+        console.log(json)
+        userFound = true;
         loadingDiv.style.display = "none";
        profileCardDiv.innerHTML = renderProfileCard(json.avatar_url, json.login, json.followers, json.following, json.html_url)
     })
@@ -39,10 +43,12 @@ function findUser(username){
 
 function errorHandler(error){
     
+    userFound = false;
     if(error.status == 404){
         loadingDiv.style.display = "none";
         headerDiv.style.marginTop ="2rem";
         errorDiv.innerHTML = `<div class="error-div"> <img src="./assets/Octocat.png" class="error-img"> <div class="error-msg">Oops! User Not found :( </div></div>`; 
+
     }
 
     if(error.status == 403){
@@ -76,7 +82,7 @@ function getRepos(username){
             reposCardDiv.innerHTML = renderRepos(json);
             window.scrollTo({ left: 0, top: document.body.scrollHeight, behavior: "smooth" });
         }
-        else {
+        else if(json.length === 0 && userFound){
             reposCardDiv.innerHTML = `
             <div class="error-div no-repo-error-div"> <img src="./assets/Octocat.png" class="no-repo-error-img"> <div class="error-msg"> No Repos  :( </div></div>`
         }
